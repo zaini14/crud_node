@@ -64,6 +64,14 @@
                     size="small">
                     Remove
                   </el-button>
+
+                  <el-button
+                    @click="modalDetail(scope.row)"
+                    type="text"
+                    size="small">
+                    Detail
+                  </el-button>
+
                 </template> 
           </el-table-column>
 
@@ -102,6 +110,27 @@ export default {
       })
   },
   methods: {
+    modalDetail(row) {
+      const id = row.id
+
+      axios
+      .get(`http://localhost:3000/api/employees/${id}`)
+      .then((response) => {
+        const data = response.data[0]
+
+        response => response.json()
+        console.log(response)
+        this.$alert(`
+          <p>${data.name}</p>
+          <p>${data.department}</p>
+          <p>${data.gender}</p>
+          <p>${data.about}</p>
+          `, 'Detail Data', {
+          dangerouslyUseHTMLString: true
+        })
+      })
+    },
+
     modalDelete(index, row) {
         this.$confirm("This will permanently delete the file. Continue?", "Warning", {
           confirmButtonText: "Yes",

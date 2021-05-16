@@ -4,6 +4,7 @@ import Home from "../views/Home.vue"
 import Employees from "../views/Employees.vue"
 import Add from "../views/Add.vue"
 import Edit from "../views/Edit.vue"
+import PageNotFound from '../views/PageNotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -30,11 +31,14 @@ const routes = [
     path: "/edit/:id",
     name: "Edit",
     component: Edit
-  }
+  },
+
+  { path: "*", component: PageNotFound }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
 export default router
